@@ -1,0 +1,39 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-react": "^6.1.12",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.4.2",
+    "@mui/material": "^5.15.19",
+    "@mui/material-nextjs": "^5.15.11",
+    "aws-amplify": "^6.3.4",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.5",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@aws-amplify/backend": "^1.0.2",
+    "@aws-amplify/backend-cli": "^1.0.3",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "aws-cdk": "^2.143.1",
+    "aws-cdk-lib": "^2.143.1",
+    "constructs": "^10.3.0",
+    "esbuild": "^0.21.4",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  }
+}
