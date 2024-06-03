@@ -29,7 +29,7 @@ import { Amplify } from "aws-amplify";
 
 Amplify.configure(outputs);
 const client = generateClient<Schema>({
-  authMode: 'userPool',
+  authMode: "userPool",
 });
 
 const Todo = ({ signOut, user }: WithAuthenticatorProps) => {
@@ -61,55 +61,34 @@ const Todo = ({ signOut, user }: WithAuthenticatorProps) => {
   const fetchTodo = async () => {
     const { data: items } = await client.models.Todo.list({
       authMode: "userPool",
-      // filter: {
-      //   userId: { 
-      //     eq: user?.userId,
-      //   },
-      // },
+      filter: {
+        userId: {
+          eq: user?.userId,
+        },
+      },
     });
-    console.log("koko",items);
     setTodos(items);
   };
 
-  // function fetchTodo() {
-  //   client.models.Todo.observeQuery().subscribe({
-  //     next: (data) => {setTodos([...data.items]); console.log(data.items)},
-  //   });
-  // }
-
-  // const addTodo = async (
-  //   data: Omit<Schema["Todo"]["type"], "createdAt" | "updatedAt" | "userId">
-  // ) => {
-  //   try {
-  //     // const values = getValues();
-  //     await client.models.Todo.create({
-  //       userId: user?.userId ?? "",
-  //       name : data.name,
-  //       description: data.description,
-  //     });
-  //     resetField("name");
-  //     resetField("description");
-  //     handleClickOpen();
-  //     await fetchTodo();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  const onSubmit = async (
-   { name, description }: { name: string; description: string },
-  ) => {
-    const { data: r, errors} = 
-      await client.models.Todo.create({
+  const onSubmit = async ({
+    name,
+    description,
+  }: {
+    name: string;
+    description: string;
+  }) => {
+    await client.models.Todo.create(
+      {
         userId: user?.userId ?? "",
         name,
         description,
-      }, { authMode: "userPool" });
-      console.log("debug", r, errors);
-      resetField("name");
-      resetField("description");
-      handleClickOpen();
-      await fetchTodo();
+      },
+      { authMode: "userPool" }
+    );
+    resetField("name");
+    resetField("description");
+    handleClickOpen();
+    await fetchTodo();
   };
 
   const handleDeleteTodo = async (id: string) => {
